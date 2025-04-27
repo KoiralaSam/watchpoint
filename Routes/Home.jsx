@@ -4,10 +4,13 @@ import { AlertContext } from "../Context/AlertContext";
 import { TipsContext } from "../Context/TipsContext";
 import SignIn from "../components/SingIn";
 import { SignInContext } from "../Context/SingInContext";
+import { Link } from "react-router-dom"; // Correct import
+
 const Home = () => {
   const { ShowSignIn } = useContext(SignInContext);
   const { Alerts } = useContext(AlertContext);
   const { Tips } = useContext(TipsContext);
+
   return (
     <div className="p-6 md:p-12 max-w-7xl mx-auto space-y-12">
       {ShowSignIn && <SignIn />}
@@ -20,9 +23,9 @@ const Home = () => {
           Your neighborhood safety companion — stay alert, stay informed, stay
           safe.
           <br />
-          <a href="/alerts" className="underline-offset-4 hover:underline">
+          <Link to="/alerts" className="underline-offset-4 hover:underline">
             view alerts
-          </a>
+          </Link>
         </p>
       </section>
       <section className="bg-gray-50 p-6 rounded-xl shadow-md">
@@ -30,12 +33,12 @@ const Home = () => {
           <h2 className="text-3xl font-semibold text-gray-800">
             Recent Alerts
           </h2>
-          <a
-            href="/alerts"
+          <Link
+            to="/alerts"
             className="text-blue-600 hover:underline text-sm font-medium"
           >
             See all alerts
-          </a>
+          </Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
           {Alerts.slice(0, 7).map((alert) => (
@@ -46,12 +49,12 @@ const Home = () => {
       <section className="bg-white p-6 rounded-xl shadow-md">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-3xl font-semibold text-gray-800">Safety Tips</h2>
-          <a
-            href="/tips"
+          <Link
+            to="/tips"
             className="text-blue-600 hover:underline text-sm font-medium"
           >
             See all tips
-          </a>
+          </Link>
         </div>
         <div className="grid md:grid-cols-3 gap-3">
           {Tips.slice(0, 5).map((tip) => (
