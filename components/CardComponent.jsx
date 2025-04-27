@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 const Card = ({ card }) => {
   const { title, message, image, link } = card;
   const location = useLocation();
@@ -31,19 +31,19 @@ const Card = ({ card }) => {
         </div>
 
         {location.pathname === "/" && image && (
-          <a href={link}>
+          <Link to={link}>
             <button className="bg-blue-300 hover:bg-blue-400 translate-transform hover:scale-105 text-lg rounded-xl w-fit text-center px-2 py-2 my-4 mx-1">
               Read More
             </button>
-          </a>
+          </Link>
         )}
         {!image && location.pathname === "/" && (
-          <a
-            href={link}
+          <Link
+            to={link}
             className="hover:underline underline-offset-2 text-purple-800"
           >
             Read more...
-          </a>
+          </Link>
         )}
       </div>
     </div>
