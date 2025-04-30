@@ -20,7 +20,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md px-6 py-4 flex justify-between items-center">
+    <nav className="bg-white shadow-md px-6 py-4 flex justify-between items-center fixed">
       <div className="text-2xl font-bold tracking-tight text-gray-950">
         <Link to="/">
           Watch<span className="text-blue-600">Point</span>
