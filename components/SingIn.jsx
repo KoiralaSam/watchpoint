@@ -17,7 +17,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="absolute top-0 left-0 h-full right-0 bottom-0 bg-[rgb(0,0,0,.4)] flex justify-center items-center z-20">
+    <div className="absolute top-0 left-0 h-screen w-full bg-[rgb(0,0,0,.4)] flex justify-center items-center z-20">
       <div className="bg-gray-100 rounded-xl m-4 p-6">
         <div className="flex justify-end">
           <FaXmark

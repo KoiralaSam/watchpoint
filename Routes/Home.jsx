@@ -2,21 +2,17 @@ import { useContext } from "react";
 import Card from "../components/CardComponent";
 import { AlertContext } from "../Context/AlertContext";
 import { TipsContext } from "../Context/TipsContext";
-import SignIn from "../components/SingIn";
-import { SignInContext } from "../Context/SingInContext";
+
 import { Link } from "react-router-dom"; // Correct import
 
 const Home = () => {
-  const { ShowSignIn } = useContext(SignInContext);
   const { Alerts } = useContext(AlertContext);
   const { Tips } = useContext(TipsContext);
 
   return (
     <div className="p-6 md:p-12 max-w-7xl mx-auto space-y-12">
-      {ShowSignIn && <SignIn />}
-
       <section className="bg-gradient-to-br from-blue-100 to-white rounded-2xl shadow-lg p-10 text-center">
-        <h1 className="text-5xl font-black text-blue-900 mb-3">
+        <h1 className="text-4xl md:text-5xl font-black text-blue-900 mb-3">
           Welcome to WatchPoint
         </h1>
         <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
@@ -40,7 +36,7 @@ const Home = () => {
             See all alerts
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {Alerts.slice(0, 7).map((alert) => (
             <Card key={alert.id} card={alert} />
           ))}
@@ -56,7 +52,7 @@ const Home = () => {
             See all tips
           </Link>
         </div>
-        <div className="grid md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           {Tips.slice(0, 5).map((tip) => (
             <Card key={tip.id} card={tip} />
           ))}

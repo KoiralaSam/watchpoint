@@ -5,17 +5,18 @@ const Card = ({ card }) => {
   const location = useLocation();
 
   return (
-    <div className="w-full max-w-sm h-full bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col mt-3">
+    <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl h-full bg-white rounded-2xl shadow-md hover:shadow-xl transition-transform duration-300 overflow-hidden flex flex-col mt-3">
+      {" "}
       {image ? (
         <img
           src={image}
           alt={`${title} cover`}
-          className="w-full h-40 object-cover"
+          className="w-full h-45 object-cover flex-grow-2"
         />
       ) : (
         <></>
       )}
-      <div className="m-2 flex flex-col justify-between h-full">
+      <div className="m-2 flex flex-col justify-between h-full flex-grow ">
         <div className="flex flex-col h-full">
           <h3 className="w-full text-lg font-semibold text-gray-800">
             {title}

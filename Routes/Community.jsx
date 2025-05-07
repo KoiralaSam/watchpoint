@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { SignInContext } from "../Context/SingInContext";
 const Community = () => {
   return (
     <div className="p-8 md:p-16 max-w-4xl mx-auto space-y-12">

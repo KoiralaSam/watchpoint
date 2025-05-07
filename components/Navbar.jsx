@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom"; // Fixed import for react-router-dom
 import { FaSearch } from "react-icons/fa";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SignInContext } from "../Context/SingInContext";
 import { FaRegUser } from "react-icons/fa";
 import { SearchContext } from "../Context/SearchContext";
@@ -9,6 +9,7 @@ const Navbar = () => {
   const location = useLocation();
   const { Search, setSearch } = useContext(SearchContext);
   const { setShowSignIn } = useContext(SignInContext);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -19,14 +20,20 @@ const Navbar = () => {
     setSearch("");
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    console.log("logout");
+    window.location.reload(); // Optional: Reload the page after logout
+  };
+
   return (
-    <nav className="bg-white shadow-md px-6 py-4 flex justify-between items-center fixed">
+    <nav className="w-full bg-white shadow-md px-6 py-4 flex justify-between items-center fixed">
       <div className="text-2xl font-bold tracking-tight text-gray-950">
         <Link to="/">
           Watch<span className="text-blue-600">Point</span>
         </Link>
       </div>
-      <div className="flex gap-16 text-md font-medium">
+      <div className="hidden md:flex gap-16 text-md font-medium">
         <Link
           to="/alerts"
           className="text-gray-700 underline-offset-4 hover:text-blue-600 hover:underline transition duration-200"
@@ -49,13 +56,13 @@ const Navbar = () => {
           to="/community"
           className="text-gray-700 hover:text-blue-600 underline-offset-4 hover:underline transition duration-200"
         >
-          Community
+          About
         </Link>
       </div>
       <div className="flex items-center">
-        {location.pathname !== "/" && (
-          <>
-            <FaSearch className="mr-[-250px] size={30}" />
+        {location.pathname !== "/" && location.pathname !== "/community" && (
+          <div className="hidden md:flex">
+            <FaSearch className="mr-[-250px] mt-[15px] size={30}" />
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
@@ -65,7 +72,7 @@ const Navbar = () => {
                 onChange={handleChange}
               />
             </form>
-          </>
+          </div>
         )}
 
         {!localStorage.getItem("user") && (
@@ -79,7 +86,10 @@ const Navbar = () => {
           </button>
         )}
         {localStorage.getItem("user") && (
-          <div className="relative w-full flex flex-col items-center m-2 group">
+          <div
+            className="relative w-full flex flex-col items-center m-2 group"
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+          >
             {/* User Icon and Name */}
             <div className="flex flex-col items-center">
               <FaRegUser />
@@ -87,19 +97,54 @@ const Navbar = () => {
                 {JSON.parse(localStorage.getItem("user")).name.split(" ")[0]}
               </h4>
             </div>
-
-            {/* Logout Button */}
-            <div className="absolute top-full mt-1 hidden group-hover:flex flex-col items-center">
-              <button
-                className="bg-gray-100 text-lg p-1 rounded-md shadow-md hover:bg-gray-200"
-                onClick={() => {
-                  localStorage.removeItem("user");
-                  window.location.reload(); // Optional: Reload the page after logout
-                }}
-              >
-                Logout
-              </button>
-            </div>
+          </div>
+        )}
+        {dropdownOpen && (
+          <div className="absolute top-20 right-0 mt-2 bg-[rgba(30,24,24,0.8)] shadow-lg rounded-lg w-40 text-center mr-5 text-white">
+            <Link
+              to="/"
+              className="block px-4 py-2  hover:bg-blue-500 md:hidden"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            >
+              Home
+            </Link>
+            <Link
+              to="/alerts"
+              className="block px-4 py-2  hover:bg-blue-500 md:hidden"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            >
+              Alerts
+            </Link>
+            <Link
+              to="/tips"
+              className="block px-4 py-2  hover:bg-blue-500 md:hidden"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            >
+              Tips
+            </Link>
+            <Link
+              to="/report"
+              className="block px-4 py-2  hover:bg-blue-500 md:hidden"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            >
+              Report
+            </Link>
+            <Link
+              to="/community"
+              className="block px-4 py-2  hover:bg-blue-500 md:hidden"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            >
+              Community
+            </Link>
+            <button
+              onClick={() => {
+                handleLogout();
+                setDropdownOpen(!dropdownOpen);
+              }}
+              className="block w-full px-4 py-2 text-center hover:bg-blue-500"
+            >
+              Logout
+            </button>
           </div>
         )}
       </div>
