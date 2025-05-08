@@ -1,3 +1,8 @@
 {
-  "rewrites": [{ "sources": "/(.*)", "destination": "/" }]
+  "rewrites": [
+    {
+      "source": "/api/:path*", // Correct key
+      "destination": "https://example.com/api/:path*"
+    }
+  ]
 }
