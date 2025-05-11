@@ -23,7 +23,6 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     console.log("logout");
-    window.location.reload(); // Optional: Reload the page after logout
   };
 
   return (
