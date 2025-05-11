@@ -77,7 +77,11 @@ const Reports = () => {
           type="text"
           id="reporter"
           name="reporter"
-          value={reporter}
+          value={
+            localStorage.getItem("user")
+              ? localStorage.getItem("user").name
+              : reporter
+          }
           onChange={handleChange}
           placeholder="Name of the reporter."
           className="border border-gray-400 rounded-lg focus:outline-blue-600 p-3"
